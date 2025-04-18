@@ -32,7 +32,7 @@
   border-radius: 10px;
   font-size: 16px;
   font-family: arial;
-
+  
   &:focus {
     outline: none;
     border-color: #007bff;
@@ -48,7 +48,7 @@
   min-height: 100px;
   resize: vertical;
   font-family: arial;
-
+  
   &:focus {
     outline: none;
     border-color: #007bff;
@@ -62,7 +62,7 @@
   border-radius: 10px;
   font-size: 16px;
   background-color: white;
-
+  
   &:focus {
     outline: none;
     border-color: #007bff;
@@ -80,11 +80,11 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
-
+  
   &:hover {
     background-color: #0069d9;
   }
-
+  
   &:disabled {
     background-color: #cccccc;
     cursor: not-allowed;

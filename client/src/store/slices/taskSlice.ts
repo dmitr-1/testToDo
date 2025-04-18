@@ -21,8 +21,22 @@ const taskSlice = createSlice({
       };
       state.tasks.push(newTask);
     },
+    updateTask: (state, action: PayloadAction<{ id: string; data: TaskFormData }>) => {
+      const { id, data } = action.payload;
+      const taskIndex = state.tasks.findIndex((task) => task.id === id);
+
+      if (taskIndex !== -1) {
+        state.tasks[taskIndex] = {
+          ...state.tasks[taskIndex],
+          ...data,
+        };
+      }
+    },
+    deleteTask: (state, action: PayloadAction<string>) => {
+      state.tasks = state.tasks.filter((task) => task.id !== action.payload);
+    },
   },
 });
 
-export const { addTask } = taskSlice.actions;
+export const { addTask, updateTask, deleteTask } = taskSlice.actions;
 export default taskSlice.reducer;

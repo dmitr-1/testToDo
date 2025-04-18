@@ -1,13 +1,17 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch } from '../../store/hooks';
-import { addTask } from '../../store/slices/taskSlice';
+import { addTask, updateTask } from '../../store/slices/taskSlice';
 import './TaskForm.scss';
 import { TaskFormData } from '../../types/Task';
 
-const TaskForm = () => {
-  const dispatch = useAppDispatch();
+interface TaskFormProps {
+  taskId?: string;
+  initialData?: TaskFormData;
+  onComplete?: () => void;
+}
 
-  const initialData = { title: '', description: '' };
+const TaskForm = ({ taskId, initialData = { title: '', description: '' }, onComplete }: TaskFormProps) => {
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -20,9 +24,15 @@ const TaskForm = () => {
   });
 
   const onSubmit: SubmitHandler<TaskFormData> = (data) => {
-    dispatch(addTask(data));
-    console.log('data', data);
-    reset({ title: '', description: '' });
+    if (taskId) {
+      dispatch(updateTask({ id: taskId, data }));
+    } else {
+      dispatch(addTask(data));
+      reset({ title: '', description: '' });
+    }
+    if (onComplete) {
+      onComplete();
+    }
   };
 
   return (
