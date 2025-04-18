@@ -11,11 +11,9 @@ function App() {
       </header>
       <div className='content-container'>
         <div className='card-form'>
-          <h2 className='card-title'>Добавить задачу</h2>
           <TaskForm />
         </div>
         <div className='card-list'>
-          <h2 className='card-title'>Список задач</h2>
           <TaskList />
         </div>
       </div>

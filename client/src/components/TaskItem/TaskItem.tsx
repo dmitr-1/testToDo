@@ -2,7 +2,7 @@ import { Task } from '../../types/Task';
 import './TaskItem.scss';
 import { useAppDispatch } from '../../store/hooks';
 import TaskForm from '../TaskForm/TaskForm';
-import { deleteTask } from '../../store/slices/taskSlice';
+import { deleteTask, toggleTaskCompleted } from '../../store/slices/taskSlice';
 import DeleteModal from '../modalDelete/DeleteModal';
 import { useState } from 'react';
 
@@ -32,25 +32,28 @@ const TaskItem = ({ task }: TaskItemProps) => {
     setIsEditing(false);
   };
 
+  const handleToggleCompleted = () => {
+    dispatch(toggleTaskCompleted(task.id));
+  };
+
   return (
-    <div className='task-item-container'>
+    <div className={`task-item-container ${task.completed ? 'completed' : ''}`}>
       {!isEditing ? (
         <>
           <div className='task-header'>
             <h3 className='task-title'>{task.title}</h3>
+            <input style={{ cursor: 'pointer' }} type='checkbox' checked={task.completed} onChange={handleToggleCompleted} />
           </div>
-
           <p className='task-description'>{task.description}</p>
-
-          <div className='task-meta'>
-            <div className='buttons-container'>
+          <div className='buttons-container'>
+            <button className='action-button' onClick={handleDelete}>
+              Удалить
+            </button>
+            {!task.completed && (
               <button className='action-button' onClick={handleEdit}>
                 Редактировать
               </button>
-              <button className='action-button' onClick={handleDelete}>
-                Удалить
-              </button>
-            </div>
+            )}
           </div>
         </>
       ) : (
@@ -68,7 +71,13 @@ const TaskItem = ({ task }: TaskItemProps) => {
           </button>
         </div>
       )}
-      <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={confirmDelete} title={`Удалить ${task.title}?`} confirmText='Удалить' cancelText='Отмена' />
+      <DeleteModal 
+      isOpen={isDeleteModalOpen} 
+      onClose={() => setIsDeleteModalOpen(false)} 
+      onConfirm={confirmDelete} 
+      title={`Удалить ${task.title}?`} 
+      confirmText='Удалить' 
+      cancelText='Отмена' />
     </div>
   );
 };

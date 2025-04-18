@@ -33,13 +33,6 @@
   word-wrap: break-word;
 }
 
-.task-meta {
-  align-items: center;
-  margin-top: 15px;
-  color: #6c757d;
-  font-size: 14px;
-}
-
 .buttons-container {
   display: flex;
   justify-content: space-between;
@@ -49,12 +42,17 @@
 .action-button {
   border: none;
   cursor: pointer;
-  color: #6c757d;
+  color: #ffffff;
   padding: 5px;
   border-radius: 4px;
+  background-color: #007bff;
 
   &:hover {
-    color: #495057;
-    background-color: #f8f9fa;
+    color: #ffffff;
+    background-color: #d1be11;
   }
+}
+
+.task-item-container.completed {
+  background-color: #e0ffe0;
 }

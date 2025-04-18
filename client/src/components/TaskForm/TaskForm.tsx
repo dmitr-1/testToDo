@@ -64,7 +64,7 @@ const TaskForm = ({ taskId, initialData = { title: '', description: '' }, onComp
         </div>
 
         <button className='submit-button' type='submit' disabled={!isValid}>
-          Добавить задачу
+        {taskId ? 'Обновить задачу' : 'Добавить задачу'}
         </button>
       </form>
     </div>
