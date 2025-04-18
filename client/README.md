@@ -1,3 +1,3 @@
-# testCSGR
-# cd client
-# npm run dev
+# 1. testCSGR
+# 2. cd client
+# 3. npm run dev
